@@ -17,9 +17,12 @@ nodes, GPU acceleration, and Slurm workload scheduling.
 
 ## Get started
 
-Don't have an account yet? [Request an Account](getting-started/request-account.md){ .md-button .md-button--primary }
-
 <div class="hpc-grid" markdown>
+
+<a class="hpc-card" href="getting-started/request-account/">
+  <span class="hpc-card__title">Request an account</span>
+  <span class="hpc-card__desc">Don't have access yet? Start here</span>
+</a>
 
 <a class="hpc-card" href="getting-started/connecting/">
   <span class="hpc-card__title">Connect to the cluster</span>
