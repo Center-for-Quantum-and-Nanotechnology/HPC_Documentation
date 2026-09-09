@@ -507,3 +507,19 @@
   color: inherit;
   white-space: pre;
 }
+
+/* Widen the content column on larger desktop monitors. Material caps
+   every .md-grid row (header, tabs, footer, and — combined with
+   .md-main__inner — the sidebar/content row) at the same max-width,
+   centered with auto margins. Raising that one value both grows
+   .md-content and shrinks .md-main__inner's left/right margins by the
+   same stroke, which pushes the fixed-width sidebars toward the screen
+   edges — everything stays flex/auto-sized, only the ceiling moves.
+   Scoped to Material's own "large desktop" breakpoint (it already bumps
+   the root font-size here) so normal laptop/desktop widths are
+   untouched. */
+@media screen and (min-width: 100em) {
+  .md-grid {
+    max-width: 70rem;
+  }
+}
