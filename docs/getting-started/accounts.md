@@ -16,9 +16,9 @@ Cluster Management Software (MCMS) — you cannot self-register.
 You'll be required to change your temporary password at first login.
 
 !!! info "Requesting an account"
-    TODO: VERIFY WITH HPC ADMINISTRATOR — the request process (who to
-    contact, what approvals are required, expected turnaround) is not yet
-    documented here.
+    Use [Request an Account](request-account.md) to build a ready-to-send
+    request. The approval process itself (who reviews it, expected
+    turnaround) is `TODO: VERIFY WITH HPC ADMINISTRATOR`.
 
 ## After your account is created
 

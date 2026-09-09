@@ -388,6 +388,52 @@
   font-weight: 400;
 }
 
+/* Single-select toggle-button group (e.g. Professor/Student/Unaffiliated
+   on the account-request page). Real radio inputs, visually hidden but
+   still keyboard/screen-reader accessible, styled via the adjacent
+   label. */
+.md-typeset .hpc-toggle-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin: 0.25em 0 0.5em;
+}
+
+.md-typeset .hpc-toggle-group input[type="radio"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.md-typeset .hpc-toggle-group label {
+  padding: 0.4em 0.9em;
+  border: 1px solid var(--hpc-border);
+  border-radius: 6px;
+  background: var(--hpc-bg);
+  color: var(--hpc-text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.md-typeset .hpc-toggle-group input[type="radio"]:checked + label {
+  background: var(--hpc-primary);
+  border-color: var(--hpc-primary);
+  color: #fff;
+}
+
+.md-typeset .hpc-toggle-group input[type="radio"]:focus-visible + label {
+  outline: 2px solid var(--hpc-primary);
+  outline-offset: 2px;
+}
+
 .md-typeset .hpc-script-gen__output {
   border: 1px solid var(--hpc-border);
   border-radius: 10px;

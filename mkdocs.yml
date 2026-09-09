@@ -52,6 +52,7 @@ extra_css:
 extra_javascript:
   - javascripts/download-button.js
   - javascripts/script-generator.js
+  - javascripts/request-account.js
 
 markdown_extensions:
   - admonition
@@ -83,6 +84,7 @@ nav:
   - Getting Started:
       - getting-started/index.md
       - Account Setup: getting-started/accounts.md
+      - Request an Account: getting-started/request-account.md
       - Connecting: getting-started/connecting.md
       - First Login: getting-started/first-login.md
       - Your First Job: getting-started/first-job.md
