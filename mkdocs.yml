@@ -1,0 +1,158 @@
+site_name: SCSU HPC Documentation
+site_description: Documentation and Standard Operating Procedures for the Southern Connecticut State University High Performance Computing cluster
+site_author: SCSU HPC
+repo_name: scsu-hpc-docs
+edit_uri: ""
+
+docs_dir: docs
+
+hooks:
+  - hooks/download_button.py
+
+theme:
+  name: material
+  language: en
+  custom_dir: overrides
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  logo: assets/logos/hpc.svg
+  favicon: assets/logos/hpc.svg
+  icon:
+    admonition:
+      warning: material/alert
+      danger: material/fire
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/download-button.js
+  - javascripts/script-generator.js
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - getting-started/index.md
+      - Account Setup: getting-started/accounts.md
+      - Connecting: getting-started/connecting.md
+      - First Login: getting-started/first-login.md
+      - Your First Job: getting-started/first-job.md
+      - Getting Help: getting-started/getting-help.md
+  - Cluster:
+      - cluster/index.md
+      - Architecture: cluster/architecture.md
+      - Hardware: cluster/hardware.md
+      - Login Node: cluster/login-node.md
+      - Compute Nodes: cluster/compute-nodes.md
+      - GPU Nodes: cluster/gpu-nodes.md
+      - Network: cluster/network.md
+  - Slurm:
+      - slurm/index.md
+      - Concepts: slurm/concepts.md
+      - Partitions: slurm/partitions.md
+      - Jobs Overview: slurm/jobs.md
+      - Interactive Jobs: slurm/interactive-jobs.md
+      - Batch Jobs: slurm/batch-jobs.md
+      - GPU Jobs: slurm/gpu-jobs.md
+      - Job Arrays: slurm/arrays.md
+      - Job Dependencies: slurm/dependencies.md
+      - Monitoring Jobs: slurm/monitoring.md
+      - Cancelling Jobs: slurm/cancellation.md
+      - Useful Commands: slurm/useful-commands.md
+      - Script Generator: slurm/script-generator.md
+  - Software:
+      - software/index.md
+      - PuTTY: software/putty.md
+      - WinSCP: software/winscp.md
+      - Environment Modules: software/modules.md
+      - Python: software/python.md
+      - R: software/r.md
+      - CUDA: software/cuda.md
+      - Compilers & MPI: software/compilers.md
+      - Containers: software/containers.md
+  - Storage:
+      - storage/index.md
+      - Home Directory: storage/home.md
+      - Scratch Storage: storage/scratch.md
+      - Project Storage: storage/project-storage.md
+      - Quotas: storage/quotas.md
+      - Data Transfer: storage/data-transfer.md
+  - Workflows:
+      - workflows/index.md
+      - Machine Learning: workflows/machine-learning.md
+      - MPI Applications: workflows/mpi.md
+      - Multi-GPU: workflows/multi-gpu.md
+      - Jupyter: workflows/jupyter.md
+      - Containers: workflows/containers.md
+  - Troubleshooting:
+      - troubleshooting/index.md
+      - Jobs Pending: troubleshooting/jobs-pending.md
+      - Jobs Failing: troubleshooting/jobs-failing.md
+      - Out of Memory: troubleshooting/out-of-memory.md
+      - GPU Errors: troubleshooting/gpu-errors.md
+      - Storage Errors: troubleshooting/storage-errors.md
+      - Connection Errors: troubleshooting/connection-errors.md
+  - Policies:
+      - policies/index.md
+      - Acceptable Use: policies/acceptable-use.md
+      - Resource Usage: policies/resource-usage.md
+      - Data Management: policies/data-management.md
+      - Security: policies/security.md
+      - Citations: policies/citations.md
+  - Reference:
+      - reference/index.md
+      - Command Reference: reference/commands.md
+      - Environment: reference/environment.md
+      - Environment Variables: reference/environment-variables.md
+      - Terminology: reference/terminology.md
+      - FAQ: reference/faq.md

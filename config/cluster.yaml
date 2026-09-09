@@ -1,0 +1,129 @@
+# Verified facts about the HPC cluster.
+#
+# This file is the single authoritative source for cluster-specific values
+# referenced throughout docs/. Values are pulled from the SOP draft
+# (Context/STANDARD OPERATING PROCEDURE.docx, v0.1, dated 2026-08-24) and
+# Context/Users_and_SSH.md (v0.2). Do not edit values here without updating
+# the source SOP, and do not fill in a "TODO: VERIFY" value without
+# confirming it with an HPC administrator first.
+
+cluster:
+  name: "microway"
+  display_name: "Southern Connecticut State University HPC Cluster"
+  institution: "Southern Connecticut State University"
+  vendor: "Microway"
+  document_status: "DRAFT - not yet approved for production use"
+
+contact:
+  email: "TODO: VERIFY WITH HPC ADMINISTRATOR"
+  website: "TODO: VERIFY WITH HPC ADMINISTRATOR"
+
+login:
+  hostname: "hsc.southernct.edu"
+  port: "TODO: VERIFY WITH HPC ADMINISTRATOR"
+  protocol: "SSH"
+  client: "PuTTY (Windows)"
+  vpn_required: "TODO: VERIFY WITH HPC ADMINISTRATOR"
+
+head_node:
+  hostname: "head"
+  os: "Rocky Linux 10.1 (Red Quartz)"
+  kernel: "6.12.0-124.40.1.el10_1.x86_64"
+  cpu: "Intel Xeon E5-1620 v3 @ 3.50 GHz"
+  cpu_topology: "1 socket, 4 physical cores, 2 threads/core, 8 logical CPUs"
+  memory: "~15 GiB usable, 31 GiB swap"
+  primary_disk: "~9.1 TB"
+  is_compute_member: false
+
+compute_nodes:
+  count: 8
+  names: ["node2", "node3", "node4", "node5", "node6", "node7", "node8", "node9"]
+  cpu_sockets_per_node: 2
+  physical_cores_per_node: 24
+  threads_per_core: 2
+  logical_cpus_per_node: 48
+  memory_per_node: "64,165 MB (~62.7 GiB)"
+  gpu_per_node: "1x NVIDIA Quadro K2200"
+  gpu_vram_per_node: "4 GB"
+
+scheduler:
+  name: "Slurm"
+  version: "25.11.0"
+  cluster_name: "microway"
+  controller_host: "head"
+  authentication: "MUNGE"
+  scheduler_algorithm: "backfill"
+  selection: "Consumable TRES"
+  default_mem_per_cpu: "512 MB"
+  config_file: "/etc/slurm/slurm.conf"
+  accounting_enabled: false
+  partitions:
+    - name: "short-cpu"
+      max_runtime: "1 hour"
+      priority: 40000
+      default: true
+    - name: "day-long-cpu"
+      max_runtime: "1 day"
+      priority: 20000
+    - name: "week-long-cpu"
+      max_runtime: "7 days"
+      priority: 10000
+      max_nodes_per_job: 6
+    - name: "month-long-cpu"
+      max_runtime: "31 days"
+      priority: 5000
+      max_nodes_per_job: 4
+    - name: "interactive-cpu"
+      max_runtime: "2 days"
+      default_runtime: "8 hours"
+      max_nodes_per_job: 1
+      max_cpus_per_node: 12
+      max_mem_per_node: "~32 GB"
+      oversubscribe: "2x"
+      priority: "highest observed"
+
+storage:
+  home:
+    path: "/home"
+    size: "6 TB"
+    shared: true
+    export_protocol: "NFSv4.2"
+    quota: "TODO: VERIFY WITH HPC ADMINISTRATOR"
+  scratch:
+    path: "/scratch/<USERNAME>"
+    shared: false
+    scope: "local to each compute node (node2-node9)"
+    retention_policy: "TODO: VERIFY WITH HPC ADMINISTRATOR"
+  backup:
+    path: "/backup"
+    size: "1.8 TB"
+    location: "head node"
+    coverage: "TODO: VERIFY WITH HPC ADMINISTRATOR"
+
+identity:
+  primary_group: "hpcusers"
+  gid: 3001
+  management_tool: "Microway MCMS (Accounts > Users)"
+  directory_service: "OpenLDAP (slapd) + nslcd"
+  default_shell: "/bin/bash"
+  home_directory_pattern: "/home/<USERNAME>"
+
+software:
+  environment_modules: "Lmod 8.7.65"
+  gcc: "14.3.1"
+  python: "3.12.12"
+  openmpi: "4.1.8"
+  openmpi_path: "/usr/local/mpi/intel/openmpi-cuda12.9-4.1.8/bin/mpirun"
+  intel_oneapi: "installed"
+  intel_mpi: "2021.17"
+  conda: "2025.12 (module)"
+  cuda_toolkit: "12.9"
+  cuda_driver: "580.126.09"
+  nvcc_path: "/usr/local/cuda/bin/nvcc"
+
+gpu:
+  model: "NVIDIA Quadro K2200"
+  vram: "4096 MiB (4 GB)"
+  driver: "580.126.09"
+  driver_cuda_compatibility: "13.0"
+  slurm_generic_resource: "gpu:quadro:1"

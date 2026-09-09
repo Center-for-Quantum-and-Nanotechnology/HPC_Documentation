@@ -1,0 +1,463 @@
+/*
+  HPC documentation design system.
+  Design tokens defined here, consumed by Material for MkDocs' own
+  variables so the built-in components (nav, admonitions, code blocks,
+  search) pick up the palette without template overrides.
+*/
+
+:root {
+  /* Brand */
+  --hpc-primary: #155eef;
+  --hpc-primary-dark: #0b3aa4;
+
+  /* Semantic */
+  --hpc-success: #16803c;
+  --hpc-warning: #b54708;
+  --hpc-danger: #b42318;
+  --hpc-info: #175cd3;
+
+  /* Neutrals (light) */
+  --hpc-bg: #ffffff;
+  --hpc-bg-secondary: #f8fafc;
+  --hpc-border: #e4e7ec;
+  --hpc-text: #101828;
+  --hpc-text-secondary: #475467;
+
+  /* Code */
+  --hpc-code-bg: #0b1220;
+  --hpc-code-text: #e6edf7;
+
+  /* Typography */
+  --hpc-font-body: "Inter", -apple-system, sans-serif;
+  --hpc-font-code: "JetBrains Mono", "SFMono-Regular", monospace;
+
+  /* Wire brand tokens into Material's own variables */
+  --md-primary-fg-color: var(--hpc-primary);
+  --md-primary-fg-color--dark: var(--hpc-primary-dark);
+  --md-accent-fg-color: var(--hpc-primary);
+  --md-typeset-a-color: var(--hpc-primary);
+}
+
+[data-md-color-scheme="slate"] {
+  --hpc-bg: #0b1220;
+  --hpc-bg-secondary: #111827;
+  --hpc-border: #263244;
+  --hpc-text: #f2f4f7;
+  --hpc-text-secondary: #98a2b3;
+  --hpc-code-bg: #050914;
+  --hpc-code-text: #e6edf7;
+
+  --md-primary-fg-color: var(--hpc-primary);
+  --md-default-bg-color: var(--hpc-bg);
+}
+
+/* Typography hierarchy: don't let headings dominate the page */
+.md-typeset h1 {
+  font-weight: 700;
+  font-size: 2.25rem;
+  letter-spacing: -0.02em;
+}
+
+.md-typeset h2 {
+  font-weight: 600;
+  font-size: 1.6rem;
+  margin-top: 2em;
+}
+
+.md-typeset h3 {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.md-typeset code {
+  font-family: var(--hpc-font-code);
+  font-size: 0.85em;
+}
+
+/* Admonitions: make warnings/danger impossible to miss */
+.md-typeset .admonition.warning,
+.md-typeset .admonition.danger {
+  border-width: 0 0 0 4px;
+}
+
+.md-typeset .admonition-title {
+  font-weight: 600;
+}
+
+/* Status badges used on procedure pages (Observed/Verified, Pending Validation, etc.) */
+.hpc-status {
+  display: inline-block;
+  padding: 0.15em 0.65em;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 0.75em;
+}
+
+.hpc-status--verified {
+  background: rgba(22, 128, 60, 0.12);
+  color: var(--hpc-success);
+}
+
+.hpc-status--validated {
+  background: rgba(21, 94, 239, 0.12);
+  color: var(--hpc-primary);
+}
+
+.hpc-status--pending {
+  background: rgba(181, 71, 8, 0.12);
+  color: var(--hpc-warning);
+}
+
+.hpc-status--staff {
+  background: rgba(180, 35, 24, 0.12);
+  color: var(--hpc-danger);
+}
+
+/* Task-oriented homepage grid */
+.md-typeset .hpc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.md-typeset .hpc-grid p {
+  margin: 0;
+}
+
+/* Per-page "Download" button (injected by hooks/download_button.py) */
+.hpc-download-menu {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
+.hpc-download-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.35em 0.75em;
+  border: 1px solid var(--hpc-border);
+  border-radius: 6px;
+  background: var(--hpc-bg);
+  color: var(--hpc-text-secondary);
+  font-size: 0.75rem;
+  font-family: var(--hpc-font-body);
+  cursor: pointer;
+}
+
+.hpc-download-toggle:hover,
+.hpc-download-toggle[aria-expanded="true"] {
+  border-color: var(--hpc-primary);
+  color: var(--hpc-primary);
+}
+
+.md-typeset .hpc-download-list {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  z-index: 10;
+  min-width: 160px;
+  margin: 0;
+  padding: 0rem;
+  list-style: none;
+  border: 1px solid var(--hpc-border);
+  border-radius: 8px;
+  background: var(--hpc-bg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.md-typeset ul.hpc-download-list li {
+  list-style: none;
+  margin: 0;
+}
+
+.hpc-download-list button {
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+  width: 100%;
+  padding: 0.45em 0.6em;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--hpc-text);
+  font-size: 0.8125rem;
+  font-family: var(--hpc-font-body);
+  text-align: left;
+  cursor: pointer;
+}
+
+.hpc-download-list button svg {
+  flex: none;
+  color: var(--hpc-text-secondary);
+}
+
+.hpc-download-list button:hover svg {
+  color: var(--hpc-primary);
+}
+
+.hpc-download-list button:hover {
+  background: var(--hpc-bg-secondary);
+  color: var(--hpc-primary);
+}
+
+/* Downloading a page as PDF uses the browser's own print-to-PDF, styled
+   to hide site chrome and print just the page content. */
+@media print {
+  .md-header,
+  .md-tabs,
+  .md-sidebar,
+  .md-footer,
+  .hpc-download-menu,
+  .md-content__button,
+  .md-typeset .headerlink,
+  .md-nav {
+    display: none !important;
+  }
+
+  .md-content {
+    margin: 0 !important;
+  }
+
+  .md-main__inner {
+    display: block !important;
+  }
+}
+
+.md-typeset a.hpc-card {
+  display: block;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--hpc-border);
+  border-radius: 10px;
+  text-decoration: none !important;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.md-typeset a.hpc-card:hover {
+  border-color: var(--hpc-primary);
+  transform: translateY(-1px);
+}
+
+.md-typeset a.hpc-card .hpc-card__title {
+  display: block;
+  font-weight: 600;
+  color: var(--hpc-text) !important;
+  margin-bottom: 0.25rem;
+}
+
+.md-typeset a.hpc-card .hpc-card__desc {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--hpc-text-secondary) !important;
+}
+
+/* Slurm script generator (docs/slurm/script-generator.md +
+   docs/javascripts/script-generator.js) */
+.md-typeset .hpc-script-gen {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.md-typeset .hpc-script-gen__form fieldset {
+  border: 1px solid var(--hpc-border);
+  border-radius: 10px;
+  padding: 0.9rem 1rem 1.1rem;
+  margin: 0 0 1rem;
+}
+
+.md-typeset .hpc-script-gen__form legend {
+  padding: 0 0.4em;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--hpc-text-secondary);
+}
+
+.md-typeset .hpc-script-gen__form label {
+  display: block;
+  margin: 0.7em 0 0.25em;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.md-typeset .hpc-script-gen__optional {
+  font-weight: 400;
+  color: var(--hpc-text-secondary);
+}
+
+.md-typeset .hpc-script-gen__form input[type="text"],
+.md-typeset .hpc-script-gen__form input[type="email"],
+.md-typeset .hpc-script-gen__form input[type="number"],
+.md-typeset .hpc-script-gen__form select,
+.md-typeset .hpc-script-gen__form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.4em 0.55em;
+  border: 1px solid var(--hpc-border);
+  border-radius: 6px;
+  background: var(--hpc-bg);
+  color: var(--hpc-text);
+  font-family: var(--hpc-font-body);
+  font-size: 0.85rem;
+}
+
+.md-typeset .hpc-script-gen__form textarea {
+  font-family: var(--hpc-font-code);
+  resize: vertical;
+}
+
+.md-typeset .hpc-script-gen__form input:focus,
+.md-typeset .hpc-script-gen__form select:focus,
+.md-typeset .hpc-script-gen__form textarea:focus {
+  outline: 2px solid var(--hpc-primary);
+  outline-offset: 1px;
+}
+
+.md-typeset .hpc-script-gen__hint {
+  margin: 0.3em 0 0;
+  font-size: 0.75rem;
+  color: var(--hpc-text-secondary);
+}
+
+.md-typeset .hpc-script-gen__inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4em 0.6em;
+}
+
+.md-typeset .hpc-script-gen__inline input {
+  width: auto;
+  flex: 1;
+}
+
+.md-typeset .hpc-script-gen__inline select {
+  width: auto;
+}
+
+.md-typeset .hpc-script-gen__time {
+  /* Keep days/hours/mins/secs on one row always — wrapping would leave
+     a lone input on its own row and stretch it to fill the whole row
+     width, which looks worse than just letting all four shrink
+     together. */
+  flex-wrap: nowrap;
+  gap: 0.3em;
+}
+
+.md-typeset .hpc-script-gen__time input {
+  /* flex-basis (not width) governs size here, since flex-basis always
+     wins over a width declared on a plain "input[type=number]" rule
+     elsewhere, regardless of that other rule's higher specificity.
+     basis 0 + grow 1 + shrink 1 on all four inputs makes them share
+     the row's width evenly, growing and shrinking together as it's
+     resized, with no fixed floor so they never force the row to
+     overflow its container. */
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  text-align: right;
+}
+
+.md-typeset .hpc-script-gen__time span {
+  flex: none;
+  color: var(--hpc-text-secondary);
+  font-size: 0.8rem;
+  margin-right: 0.3em;
+}
+
+.md-typeset .hpc-script-gen__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0.6em 0 0;
+}
+
+.md-typeset .hpc-script-gen__checkbox input {
+  width: auto;
+  margin: 0;
+}
+
+.md-typeset .hpc-script-gen__checkbox label {
+  margin: 0;
+  font-weight: 400;
+}
+
+.md-typeset .hpc-script-gen__output {
+  border: 1px solid var(--hpc-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--hpc-bg);
+}
+
+.md-typeset .hpc-script-gen__output-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  justify-content: space-between;
+  padding: 0.6em 0.8em;
+  border-bottom: 1px solid var(--hpc-border);
+  background: var(--hpc-bg-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--hpc-text-secondary);
+  white-space: nowrap;
+}
+
+.md-typeset .hpc-script-gen__actions {
+  display: flex;
+  gap: 0.5em;
+}
+
+.md-typeset .hpc-script-gen__actions button {
+  padding: 0.3em 0.7em;
+  border: 1px solid var(--hpc-border);
+  border-radius: 6px;
+  background: var(--hpc-bg);
+  color: var(--hpc-text-secondary);
+  font-family: var(--hpc-font-body);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.md-typeset .hpc-script-gen__actions button:hover {
+  border-color: var(--hpc-primary);
+  color: var(--hpc-primary);
+}
+
+.md-typeset .hpc-script-gen__warnings {
+  margin: 0;
+  padding: 0.6em 1em;
+  list-style: none;
+  background: rgba(181, 71, 8, 0.1);
+  border-bottom: 1px solid var(--hpc-border);
+  color: var(--hpc-warning);
+  font-size: 0.8rem;
+}
+
+.md-typeset .hpc-script-gen__warnings li {
+  margin: 0.2em 0;
+}
+
+.md-typeset .hpc-script-gen__pre {
+  margin: 0;
+  padding: 1rem;
+  background: var(--hpc-code-bg);
+  color: var(--hpc-code-text);
+  overflow-x: auto;
+  max-height: 32rem;
+}
+
+.md-typeset .hpc-script-gen__pre code {
+  font-family: var(--hpc-font-code);
+  font-size: 0.8rem;
+  background: none;
+  color: inherit;
+  white-space: pre;
+}
