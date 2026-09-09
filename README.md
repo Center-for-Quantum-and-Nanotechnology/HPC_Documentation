@@ -75,11 +75,12 @@ mkdocs serve
 
 ## Deployment
 
-`.github/workflows/deploy.yml` runs `mkdocs gh-deploy --force` on every
-push to `main`, publishing to the `gh-pages` branch. It's inert until a
-GitHub remote exists and Pages is enabled for this repo (Settings → Pages
-→ deploy from the `gh-pages` branch) — nothing deploys automatically
-before that.
+`.github/workflows/deploy.yml` builds the site with `mkdocs build
+--strict` and publishes it via GitHub's native Pages deployment
+(`actions/upload-pages-artifact` + `actions/deploy-pages`) on every push
+to `main`. This requires **Settings → Pages → Source: GitHub Actions**
+(not "Deploy from a branch" — there's no `gh-pages` branch in this setup,
+the workflow deploys directly).
 
 ## Contributing
 

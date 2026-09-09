@@ -12,7 +12,6 @@ hooks:
 theme:
   name: material
   language: en
-  custom_dir: overrides
   features:
     - navigation.tabs
     - navigation.sections
