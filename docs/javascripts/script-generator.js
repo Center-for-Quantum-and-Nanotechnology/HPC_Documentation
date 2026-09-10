@@ -48,6 +48,7 @@
     debugHelpers: $("sg-debug-helpers"),
     modules: $("sg-modules"),
     commands: $("sg-commands"),
+    scratchStaging: $("sg-scratch-staging"),
   };
 
   var partitionHint = $("sg-partition-hint");
@@ -165,6 +166,16 @@
       warnings.push("Email event(s) selected, but no email address was entered — add one or the --mail-type flag has nothing to send to.");
     }
 
+    var scratchStaging = fields.scratchStaging.checked;
+    if (scratchStaging) {
+      directive("#SBATCH --signal=B:TERM@120", "Send TERM 120s before the time limit (lets scratch cleanup finish)");
+      if (nodes > 1) {
+        warnings.push(
+          "Local scratch staging with more than 1 node is best-effort: cleanup is broadcast to every allocated node on a normal exit, timeout, or Ctrl-C, but a hard crash or OOM-kill on a non-batch-host node can still leave that node's /scratch behind. Ask HPC staff about cluster-wide scratch cleanup if you need a guarantee."
+        );
+      }
+    }
+
     var maxDirectiveLen = sbatch.reduce(function (max, d) {
       return Math.max(max, d.text.length);
     }, 0);
@@ -196,6 +207,47 @@
       modules.forEach(function (m) {
         lines.push("module load " + m);
       });
+      lines.push("");
+    }
+
+    if (scratchStaging) {
+      lines.push("# ###########################################################");
+      lines.push("# Local scratch setup");
+      lines.push("#  - Assumes all input files needed are in the submit directory.");
+      lines.push("#  - Give output files your own program writes a job-ID-qualified");
+      lines.push("#    name (e.g. results.$SLURM_JOB_ID.dat) so reruns never collide.");
+      lines.push("# ###########################################################");
+      lines.push('SUBMIT_DIR="${SLURM_SUBMIT_DIR}"');
+      lines.push('LOCAL_SCRATCH_BASE="/scratch"');
+      lines.push('LOCAL_USER_DIR="${LOCAL_SCRATCH_BASE}/${USER}"');
+      lines.push('LOCAL_JOB_DIR="${LOCAL_USER_DIR}/${SLURM_JOB_ID}"');
+      lines.push("");
+      lines.push("# Create the job directory on every allocated node");
+      lines.push('srun --ntasks="${SLURM_NNODES}" --ntasks-per-node=1 \\');
+      lines.push('     mkdir -p "${LOCAL_JOB_DIR}"');
+      lines.push("");
+      lines.push("# Copy input files from the submit directory to local scratch on");
+      lines.push("# every allocated node (excludes Slurm's own log files)");
+      lines.push('srun --ntasks="${SLURM_NNODES}" --ntasks-per-node=1 \\');
+      lines.push("     rsync -a --exclude='slurm-*.out' --exclude='slurm-*.err' \\");
+      lines.push('           "${SUBMIT_DIR}/" "${LOCAL_JOB_DIR}/"');
+      lines.push("");
+      lines.push('cd "${LOCAL_JOB_DIR}" || { echo "Failed to cd to ${LOCAL_JOB_DIR} on $(hostname)"; exit 1; }');
+      lines.push('echo "Working directory on $(hostname): $(pwd)"');
+      lines.push("");
+      lines.push("cleanup() {");
+      lines.push('    echo "Cleanup started at $(date)"');
+      lines.push("    # Copy back changed files and remove local scratch on every");
+      lines.push("    # allocated node (not just this one) — --ignore-existing won't");
+      lines.push("    # overwrite a file already in the submit directory.");
+      lines.push('    srun --ntasks="${SLURM_NNODES}" --ntasks-per-node=1 \\');
+      lines.push("         bash -c 'rsync -a --ignore-existing \"$0/\" \"$1/\" && rm -rf \"$0\"' \\");
+      lines.push('         "${LOCAL_JOB_DIR}" "${SUBMIT_DIR}"');
+      lines.push('    rmdir "${LOCAL_USER_DIR}" 2>/dev/null || true');
+      lines.push('    echo "Cleanup finished at $(date)"');
+      lines.push("}");
+      lines.push("# Run cleanup on normal exit, walltime TERM (see --signal above), and Ctrl-C");
+      lines.push("trap cleanup EXIT TERM INT");
       lines.push("");
     }
 

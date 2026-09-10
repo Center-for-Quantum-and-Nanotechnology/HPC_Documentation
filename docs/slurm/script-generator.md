@@ -124,6 +124,24 @@ each partition allows.
       <textarea id="sg-commands" rows="4" placeholder="srun ./my_program"></textarea>
     </fieldset>
 
+    <fieldset>
+      <legend>Local scratch staging <span class="hpc-script-gen__optional">(optional)</span></legend>
+
+      <span class="hpc-script-gen__checkbox">
+        <input type="checkbox" id="sg-scratch-staging">
+        <label for="sg-scratch-staging">Stage to local <code>/scratch</code>, copy results back on exit</label>
+      </span>
+      <p class="hpc-script-gen__hint">
+        Copies everything from your submit directory to local <code>/scratch</code>
+        on each allocated node, runs there, then copies changed files back
+        and cleans up automatically — on normal exit, a timeout, or
+        Ctrl-C. Assumes your input files are already in the directory you
+        submit from. Give any output file your own program writes a
+        job-ID-qualified name (e.g. <code>results.$SLURM_JOB_ID.dat</code>)
+        so reruns never collide during copy-back.
+      </p>
+    </fieldset>
+
   </form>
 
   <div class="hpc-script-gen__output">
