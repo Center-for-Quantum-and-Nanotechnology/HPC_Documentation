@@ -74,6 +74,17 @@
   font-size: 0.85em;
 }
 
+/* Left sidebar nav: indent a section's children so the (bold) section
+   link reads clearly as a parent rather than blending into its own
+   list. Scoped to ".md-nav__item > .md-nav > .md-nav__list" so only
+   nested sub-lists shift right — the top-level list (Home, Getting
+   Started, Cluster, ...) sits directly under the root nav, not inside
+   a .md-nav__item, so it's untouched. Stacks at every level, so a
+   third-level list (if any) indents a bit further than its parent. */
+.md-nav__item > .md-nav > .md-nav__list {
+  margin-left: 0.75rem;
+}
+
 /* Admonitions: make warnings/danger impossible to miss */
 .md-typeset .admonition.warning,
 .md-typeset .admonition.danger {
