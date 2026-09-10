@@ -2,35 +2,17 @@
 
 <span class="hpc-status hpc-status--verified">Observed / Verified</span>
 
-## Head node
+## Head / login node
 
-| Item | Value |
-|---|---|
-| Hostname | `head` |
-| Operating system | Rocky Linux 10.1 ("Red Quartz") |
-| Kernel | `6.12.0-124.40.1.el10_1.x86_64` |
-| Architecture | x86-64 |
-| Hardware | ASUSTeK Z10PA-U8 Series |
-| Firmware | Version 0504, dated 2015-04-09 |
-| CPU | Intel Xeon E5-1620 v3 @ 3.50 GHz |
-| CPU topology | 1 socket, 4 physical cores, 2 threads/core, 8 logical CPUs |
-| Memory | ~15 GiB usable, 31 GiB swap |
-| Primary disk | ~9.1 TB |
+A dedicated server used for login, job submission, the Slurm scheduler,
+and shared storage — see [Login Node](login-node.md). It is not part of
+the compute pool, and since users never request resources on it
+directly, its detailed specifications aren't published here.
 
-### Head node storage layout
+Shared home storage (`/home`) is available cluster-wide — see
+[Storage](../storage/index.md).
 
-| Mount | Approx. size | Purpose / status |
-|---|---|---|
-| `/` | 60 GB | Operating system |
-| `/var` | 60 GB | Variable/log data |
-| `/tmp` | 30 GB | Temporary local storage |
-| `/opt` | 150 GB | Software |
-| `/ood` | 30 GB | Open OnDemand-related path — role pending validation |
-| `/mcms` | 300 GB | Microway cluster-management resources |
-| `/home` | 6 TB | Shared user home storage, exported by NFS |
-| `/backup` | 1.8 TB | Backup filesystem — relationship to MCMS backup pending validation |
-
-## Compute nodes (`node2`–`node9`)
+## Compute nodes
 
 | Resource | Per node | Cluster total (8 nodes) |
 |---|---|---|

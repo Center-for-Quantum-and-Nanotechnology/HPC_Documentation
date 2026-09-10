@@ -2,9 +2,8 @@
 
 <span class="hpc-status hpc-status--verified">Observed / Verified</span>
 
-Slurm schedules user workloads across eight compute nodes, `node2`
-through `node9`. The head node is not part of the active compute
-partitions.
+Slurm schedules user workloads across the cluster's eight compute nodes.
+The head node is not part of the active compute partitions.
 
 | Resource | Per node | Cluster total |
 |---|---|---|
@@ -17,8 +16,8 @@ partitions.
 ## Local scratch storage
 
 Each compute node exposes a local `/scratch` filesystem. It is **not**
-shared through NFS — data written to `/scratch` on `node3` is not visible
-from `node4`. Its retention/cleanup policy is pending validation. See
+shared through NFS — data written to `/scratch` on one node is not
+visible from another. Its retention/cleanup policy is pending validation. See
 [Scratch Storage](../storage/scratch.md).
 
 !!! warning
