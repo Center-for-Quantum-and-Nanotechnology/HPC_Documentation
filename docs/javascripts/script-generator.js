@@ -204,6 +204,7 @@
     var modules = fields.modules.value.split("\n").map(function (m) { return m.trim(); }).filter(Boolean);
     if (modules.length) {
       lines.push("## Load modules");
+      lines.push("module purge");
       modules.forEach(function (m) {
         lines.push("module load " + m);
       });
