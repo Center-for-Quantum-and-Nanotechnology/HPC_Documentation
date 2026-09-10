@@ -6,8 +6,6 @@
 |---|---|
 | CUDA toolkit | 12.9 |
 | `nvcc` path | `/usr/local/cuda/bin/nvcc` |
-| GPU driver | 580.126.09 |
-| Driver-reported CUDA compatibility | 13.0 |
 
 ## Checking the toolkit
 
@@ -29,10 +27,10 @@ nvidia-smi
 ```
 
 !!! note
-    The installed driver reports CUDA compatibility 13.0, while the
-    installed toolkit is 12.9 — build and run against the toolkit version
-    (12.9) unless you've separately confirmed compatibility with a newer
-    CUDA release.
+    The installed driver may report a newer CUDA compatibility than the
+    installed toolkit — build and run against the toolkit version (12.9)
+    unless you've separately confirmed compatibility with a newer CUDA
+    release.
 
 See [GPU Jobs](../slurm/gpu-jobs.md) for the full submission workflow and
 [GPU Nodes](../cluster/gpu-nodes.md) for hardware specs.

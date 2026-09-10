@@ -48,9 +48,8 @@ sbatch gpu_job.sh
 
 ## CUDA toolkit
 
-The installed CUDA toolkit is 12.9 (`nvcc` at `/usr/local/cuda/bin/nvcc`),
-with driver 580.126.09 reporting CUDA compatibility 13.0. See
-[CUDA](../software/cuda.md) for module/toolchain details.
+The installed CUDA toolkit is 12.9 (`nvcc` at `/usr/local/cuda/bin/nvcc`).
+See [CUDA](../software/cuda.md) for module/toolchain details.
 
 !!! note
     Don't run `nvidia-smi` directly on `head` expecting GPU output — the
