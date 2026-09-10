@@ -103,6 +103,11 @@ each partition allows.
     <fieldset>
       <legend>Environment &amp; commands</legend>
 
+      <span class="hpc-script-gen__checkbox">
+        <input type="checkbox" id="sg-debug-helpers">
+        <label for="sg-debug-helpers">Include optional debugging helpers <span class="hpc-script-gen__optional">(commented out — job/host info, loaded modules)</span></label>
+      </span>
+
       <label for="sg-modules">Modules to load <span class="hpc-script-gen__optional">(one per line)</span></label>
       <textarea id="sg-modules" rows="2" placeholder="python/3.12&#10;openmpi"></textarea>
 

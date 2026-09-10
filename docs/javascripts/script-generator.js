@@ -45,6 +45,7 @@
     mailBegin: $("sg-mail-begin"),
     mailEnd: $("sg-mail-end"),
     mailFail: $("sg-mail-fail"),
+    debugHelpers: $("sg-debug-helpers"),
     modules: $("sg-modules"),
     commands: $("sg-commands"),
   };
@@ -122,26 +123,35 @@
 
     var lines = ["#!/bin/bash", ""];
 
-    var jobName = fields.jobName.value.trim();
-    if (jobName) lines.push("#SBATCH --job-name=" + jobName);
-
-    var output = fields.output.value.trim() || "slurm-%j.out";
-    lines.push("#SBATCH --output=" + output);
-
-    lines.push("#SBATCH --partition=" + partitionName);
-    lines.push("#SBATCH --nodes=" + nodes);
-    lines.push("#SBATCH --ntasks=" + intVal(fields.tasks, 1));
-    lines.push("#SBATCH --cpus-per-task=" + cpus);
-    lines.push("#SBATCH --mem-per-cpu=" + intVal(fields.mem, 512) + fields.memUnit.value);
-
-    if (gpus > 0) {
-      lines.push("#SBATCH --gres=gpu:quadro:" + gpus);
+    // Collect #SBATCH directives as {text, comment} pairs first, so the
+    // trailing "# description" comments can be column-aligned once every
+    // line is known — matching the style of the professor's reference
+    // script (slurm_scratch.sh) that this generator's comments are based on.
+    var sbatch = [];
+    function directive(text, comment) {
+      sbatch.push({ text: text, comment: comment });
     }
 
-    lines.push("#SBATCH --time=" + days + "-" + pad(hours) + ":" + pad(mins) + ":" + pad(secs));
+    var jobName = fields.jobName.value.trim();
+    if (jobName) directive("#SBATCH --job-name=" + jobName, "Job name (keep it short & descriptive)");
 
-    if (fields.requeue.checked) lines.push("#SBATCH --requeue");
-    if (fields.nosmt.checked) lines.push("#SBATCH --hint=nomultithread");
+    var output = fields.output.value.trim() || "slurm-%j.out";
+    directive("#SBATCH --output=" + output, "Standard output (%j = job ID)");
+
+    directive("#SBATCH --partition=" + partitionName, "Partition/queue — run 'sinfo' to see options");
+    directive("#SBATCH --nodes=" + nodes, "Number of nodes");
+    directive("#SBATCH --ntasks=" + intVal(fields.tasks, 1), "Total number of tasks");
+    directive("#SBATCH --cpus-per-task=" + cpus, "CPUs per task");
+    directive("#SBATCH --mem-per-cpu=" + intVal(fields.mem, 512) + fields.memUnit.value, "Memory per CPU");
+
+    if (gpus > 0) {
+      directive("#SBATCH --gres=gpu:quadro:" + gpus, "GPUs requested per node");
+    }
+
+    directive("#SBATCH --time=" + days + "-" + pad(hours) + ":" + pad(mins) + ":" + pad(secs), "Max runtime (D-HH:MM:SS)");
+
+    if (fields.requeue.checked) directive("#SBATCH --requeue", "Requeue automatically if the node fails");
+    if (fields.nosmt.checked) directive("#SBATCH --hint=nomultithread", "Disable hyper-threading");
 
     var email = fields.email.value.trim();
     var mailTypes = [];
@@ -149,13 +159,36 @@
     if (fields.mailEnd.checked) mailTypes.push("END");
     if (fields.mailFail.checked) mailTypes.push("FAIL");
     if (email) {
-      lines.push("#SBATCH --mail-user=" + email);
-      if (mailTypes.length) lines.push("#SBATCH --mail-type=" + mailTypes.join(","));
+      directive("#SBATCH --mail-user=" + email, "Email address for job notifications");
+      if (mailTypes.length) directive("#SBATCH --mail-type=" + mailTypes.join(","), "Notifications: BEGIN, END, FAIL, REQUEUE, ALL, ...");
     } else if (mailTypes.length) {
       warnings.push("Email event(s) selected, but no email address was entered — add one or the --mail-type flag has nothing to send to.");
     }
 
+    var maxDirectiveLen = sbatch.reduce(function (max, d) {
+      return Math.max(max, d.text.length);
+    }, 0);
+    sbatch.forEach(function (d) {
+      lines.push(d.text.padEnd(maxDirectiveLen + 2) + "# " + d.comment);
+    });
+
     lines.push("");
+
+    if (fields.debugHelpers.checked) {
+      lines.push("# ###########################################################");
+      lines.push("# Optional useful settings / debugging");
+      lines.push("# ###########################################################");
+      lines.push('# echo "Running on host $(hostname)"');
+      lines.push('# echo "Started at $(date)"');
+      lines.push('# echo "SLURM_JOB_ID        = $SLURM_JOB_ID"');
+      lines.push('# echo "SLURM_JOB_NODELIST  = $SLURM_JOB_NODELIST"');
+      lines.push('# echo "SLURM_NTASKS        = $SLURM_NTASKS"');
+      lines.push('# echo "SLURM_CPUS_PER_TASK = $SLURM_CPUS_PER_TASK"');
+      lines.push("");
+      lines.push("# Very useful: print loaded modules (helps when jobs fail mysteriously)");
+      lines.push("# module list 2>&1 || true");
+      lines.push("");
+    }
 
     var modules = fields.modules.value.split("\n").map(function (m) { return m.trim(); }).filter(Boolean);
     if (modules.length) {
