@@ -14,6 +14,7 @@
     isClass: $("ar-is-class"),
     classNumber: $("ar-class-number"),
     department: $("ar-department"),
+    advisor: $("ar-advisor"),
     modules: $("ar-modules"),
   };
 
@@ -38,6 +39,7 @@
     var name = fields.name.value.trim();
     var email = fields.email.value.trim();
     var department = fields.department.value.trim();
+    var advisor = fields.advisor.value.trim();
     var isClass = fields.isClass.checked;
     var classNumber = fields.classNumber.value.trim();
 
@@ -65,6 +67,9 @@
     lines.push("Email: " + (email || "<your email>"));
     lines.push("Affiliation: " + selectedRole());
     lines.push("Department: " + (department || "<department>"));
+    if (advisor) {
+      lines.push("Faculty Advisor: " + advisor);
+    }
 
     if (isClass) {
       lines.push("Class-related request: Yes");

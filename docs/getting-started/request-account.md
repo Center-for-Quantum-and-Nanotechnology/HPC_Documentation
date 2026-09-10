@@ -49,6 +49,9 @@ for what happens after you send it.
 
       <label for="ar-department">Department</label>
       <input type="text" id="ar-department" placeholder="Computer Science">
+
+      <label for="ar-advisor">Faculty advisor <span class="hpc-script-gen__optional">(if applicable)</span></label>
+      <input type="text" id="ar-advisor" placeholder="Dr. Jane Smith">
     </fieldset>
 
     <fieldset>
