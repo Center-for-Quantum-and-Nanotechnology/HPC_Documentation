@@ -20,9 +20,11 @@ each partition allows.
 
       <label for="sg-job-name">Job name</label>
       <input type="text" id="sg-job-name" placeholder="my_job">
+      <p class="hpc-script-gen__hint">Sets <code>--job-name</code> — keep it short &amp; descriptive.</p>
 
       <label for="sg-output">Output file</label>
       <input type="text" id="sg-output" value="slurm-%j.out">
+      <p class="hpc-script-gen__hint">Sets <code>--output</code>. <code>%j</code> in the filename expands to the job ID.</p>
 
       <label for="sg-partition">Partition</label>
       <select id="sg-partition">
@@ -40,12 +42,15 @@ each partition allows.
 
       <label for="sg-nodes">Nodes</label>
       <input type="number" id="sg-nodes" min="1" step="1" value="1">
+      <p class="hpc-script-gen__hint">Sets <code>--nodes</code> — number of nodes to allocate.</p>
 
       <label for="sg-tasks">Tasks</label>
       <input type="number" id="sg-tasks" min="1" step="1" value="1">
+      <p class="hpc-script-gen__hint">Sets <code>--ntasks</code> — total number of tasks across all nodes.</p>
 
       <label for="sg-cpus">CPUs per task</label>
       <input type="number" id="sg-cpus" min="1" step="1" value="1">
+      <p class="hpc-script-gen__hint">Sets <code>--cpus-per-task</code>.</p>
 
       <label for="sg-mem">Memory per CPU</label>
       <span class="hpc-script-gen__inline">
@@ -55,6 +60,7 @@ each partition allows.
           <option value="G">GB</option>
         </select>
       </span>
+      <p class="hpc-script-gen__hint">Sets <code>--mem-per-cpu</code>.</p>
 
       <label for="sg-gpus">GPUs per node</label>
       <input type="number" id="sg-gpus" min="0" step="1" value="0">
@@ -71,6 +77,7 @@ each partition allows.
         <input type="number" id="sg-mins" min="0" max="59" step="1" value="0" aria-label="Minutes"><span>m</span>
         <input type="number" id="sg-secs" min="0" max="59" step="1" value="0" aria-label="Seconds"><span>s</span>
       </span>
+      <p class="hpc-script-gen__hint">Sets <code>--time</code> (format: D-HH:MM:SS).</p>
 
       <span class="hpc-script-gen__checkbox">
         <input type="checkbox" id="sg-requeue">
@@ -88,6 +95,7 @@ each partition allows.
 
       <label for="sg-email">Email address</label>
       <input type="email" id="sg-email" placeholder="you@southernct.edu">
+      <p class="hpc-script-gen__hint">Sets <code>--mail-user</code>.</p>
 
       <span class="hpc-script-gen__checkbox">
         <input type="checkbox" id="sg-mail-begin"><label for="sg-mail-begin">Job starts</label>
@@ -98,13 +106,14 @@ each partition allows.
       <span class="hpc-script-gen__checkbox">
         <input type="checkbox" id="sg-mail-fail"><label for="sg-mail-fail">Job fails</label>
       </span>
+      <p class="hpc-script-gen__hint">Sets <code>--mail-type</code>.</p>
     </fieldset>
 
     <fieldset>
       <legend>Environment &amp; commands</legend>
 
       <span class="hpc-script-gen__checkbox">
-        <input type="checkbox" id="sg-debug-helpers">
+        <input type="checkbox" id="sg-debug-helpers" checked>
         <label for="sg-debug-helpers">Include optional debugging helpers <span class="hpc-script-gen__optional">(commented out — job/host info, loaded modules)</span></label>
       </span>
 
