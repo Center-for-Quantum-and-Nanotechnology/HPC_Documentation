@@ -128,7 +128,7 @@ each partition allows.
       <legend>Local scratch staging <span class="hpc-script-gen__optional">(optional)</span></legend>
 
       <span class="hpc-script-gen__checkbox">
-        <input type="checkbox" id="sg-scratch-staging">
+        <input type="checkbox" id="sg-scratch-staging" checked>
         <label for="sg-scratch-staging">Stage to local <code>/scratch</code>, copy results back on exit</label>
       </span>
       <p class="hpc-script-gen__hint">
