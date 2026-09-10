@@ -2,7 +2,7 @@
 
 <span class="hpc-status hpc-status--verified">Observed / Verified</span>
 
-When you connect over SSH (see [Connecting](../getting-started/connecting.md)),
+When you SSH to `hsc.southernct.edu` (see [Connecting](../getting-started/connecting.md)),
 you land on the cluster's single head/login node.
 
 ## What runs here
