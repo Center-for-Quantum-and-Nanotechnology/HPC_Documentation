@@ -49,7 +49,7 @@ the **Session** screen:
 | Host Name | `hsc.southernct.edu` | |
 | Port | `TODO: VERIFY WITH HPC ADMINISTRATOR` | Not published in this document — obtain from your HPC administrator |
 | Connection type | `SSH` | |
-| Saved Sessions | e.g. `SCSU HPC` | Type a name, click **Save** to create a reusable profile |
+| Saved Sessions | e.g. `CSCU HPC` | Type a name, click **Save** to create a reusable profile |
 
 Loading a saved session restores the hostname, port, and (if you set one
 under **Connection → Data**) username — never your password.

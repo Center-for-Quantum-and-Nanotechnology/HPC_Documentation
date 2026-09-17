@@ -1,8 +1,8 @@
 ---
-title: SCSU HPC
+title: CSCU HPC
 ---
 
-# SCSU High Performance Computing
+# CSCU High Performance Computing
 
 Run simulations. Train models. Process data. This is the documentation
 for the Southern Connecticut State University HPC cluster — 8 compute

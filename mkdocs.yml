@@ -1,6 +1,6 @@
-site_name: SCSU HPC Documentation
+site_name: CSCU HPC Documentation
 site_description: Documentation and Standard Operating Procedures for the Southern Connecticut State University High Performance Computing cluster
-site_author: SCSU HPC
+site_author: CSCU HPC
 repo_name: scsu-hpc-docs
 edit_uri: ""
 

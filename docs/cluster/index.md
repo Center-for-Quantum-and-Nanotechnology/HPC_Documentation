@@ -1,6 +1,6 @@
 # Cluster
 
-Reference material on the physical and logical architecture of the SCSU
+Reference material on the physical and logical architecture of the CSCU
 HPC cluster — a Microway system running Rocky Linux and Slurm.
 
 - [Architecture](architecture.md) — how the pieces fit together

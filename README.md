@@ -1,4 +1,4 @@
-# SCSU HPC Documentation
+# CSCU HPC Documentation
 
 Documentation-as-code for the Southern Connecticut State University High
 Performance Computing (HPC) cluster: a [MkDocs Material](https://squidfunk.github.io/mkdocs-material/)

@@ -25,7 +25,7 @@ Open **PuTTY → Session** and enter:
 | **Host Name (or IP address)** | `hsc.southernct.edu` |
 | **Port** | `TODO: VERIFY WITH HPC ADMINISTRATOR` |
 | **Connection type** | `SSH` |
-| **Saved Sessions** | A descriptive name such as `SCSU HPC` |
+| **Saved Sessions** | A descriptive name such as `CSCU HPC` |
 
 !!! warning "SSH port"
     The SSH port is intentionally not published in this document. Obtain
@@ -51,7 +51,7 @@ Go to **Connection → Data** and enter your HPC username in
 
 ### 3. Save the session
 
-Return to **Session**, confirm the name (e.g. `SCSU HPC`), and click
+Return to **Session**, confirm the name (e.g. `CSCU HPC`), and click
 **Save**. This stores the hostname, port, and username on this
 workstation — not your password.
 
