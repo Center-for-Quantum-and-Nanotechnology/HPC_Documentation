@@ -7,6 +7,9 @@ client for Windows. Where [Data Transfer](../storage/data-transfer.md)
 covers command-line `scp`/`rsync`, this page covers the drag-and-drop GUI
 alternative.
 
+!!! tip "Prefer to watch?"
+    Skip ahead to the [video walkthrough](#video-tutorial) below.
+
 ## Installing WinSCP
 
 Download the installer from the [official WinSCP site](https://winscp.net/)
@@ -97,3 +100,10 @@ your `/home/<USERNAME>` directory on the cluster on the other.
 
 - [PuTTY](putty.md) — terminal access to the same host
 - [Data Transfer](../storage/data-transfer.md) — the command-line equivalent (`scp`/`rsync`)
+
+## Video Tutorial
+
+<div class="hpc-video-embed">
+  <iframe src="https://www.youtube-nocookie.com/embed/EADV3xSJkKQ"
+          title="WinSCP tutorial video" loading="lazy" allowfullscreen></iframe>
+</div>

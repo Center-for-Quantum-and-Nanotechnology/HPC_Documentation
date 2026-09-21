@@ -5,3 +5,6 @@ __pycache__/
 .mkdocs_cache/
 .DS_Store
 Thumbs.db
+
+# Raw video source files (uploaded to YouTube, not served by the site)
+docs/assets/videos/

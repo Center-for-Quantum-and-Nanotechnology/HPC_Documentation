@@ -9,6 +9,9 @@ against — this page covers installing it and a couple of features that
 go beyond a basic login: saved sessions in more depth, public-key
 authentication, and X11 forwarding.
 
+!!! tip "Prefer to watch?"
+    Skip ahead to the [video walkthrough](#video-tutorial) below.
+
 ## Installing PuTTY
 
 1. Download the installer from the [official PuTTY download page](https://www.putty.org/).
@@ -144,3 +147,10 @@ forwarding**, and connect as usual.
 
 - [Connecting](../getting-started/connecting.md) — the day-to-day login procedure
 - [WinSCP](winscp.md) — graphical file transfer, can reuse the same saved PuTTY session
+
+## Video Tutorial
+
+<div class="hpc-video-embed">
+  <iframe src="https://www.youtube-nocookie.com/embed/p7MoX91aS0Q"
+          title="PuTTY tutorial video" loading="lazy" allowfullscreen></iframe>
+</div>
