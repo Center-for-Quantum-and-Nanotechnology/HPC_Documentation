@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "hpc-docs",
-      "runtimeExecutable": "C:\\GitHub\\SOP_HPC\\.venv\\Scripts\\python.exe",
-      "runtimeArgs": ["-m", "mkdocs", "serve", "--dev-addr=127.0.0.1:8765"],
-      "port": 8765
+      "name": "scsu-hpc-docs",
+      "runtimeExecutable": "C:\\GitHub\\scsu-hpc-docs\\.venv\\Scripts\\python.exe",
+      "runtimeArgs": ["-m", "mkdocs", "serve", "--dev-addr=127.0.0.1:8766"],
+      "port": 8766
     }
   ]
 }
