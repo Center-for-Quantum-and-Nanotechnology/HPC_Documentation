@@ -11,6 +11,8 @@ This doesn't submit anything on its own — it just formats the request.
 Accounts are still provisioned manually; see [Account Setup](accounts.md)
 for what happens after you send it.
 
+All requests should be sent to pellegrinor2@southernct.edu
+
 <div id="hpc-account-request" class="hpc-script-gen">
   <form class="hpc-script-gen__form" autocomplete="off">
 
